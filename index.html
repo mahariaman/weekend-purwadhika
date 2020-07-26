@@ -1,0 +1,109 @@
+<html>
+<script>
+    let jenisBuah = ["apel", "pisang", "jeruk"];
+    let stokBuah = [5, 7, 8];
+    let price = [2000, 3000, 5000];
+    let cartBuah = []; // untuk menampung nama buah yg beli
+    let cartQty = []; // untuk menampung brp baynyak jumlah
+    let count = [];
+
+    do {
+        alert("Selamat Datang di Toko Kami")
+        inputUserMenuUtaama = prompt("1. Menu Utama 2. Exit")
+        //user pilih menu belanja
+        // bikin if lagi buat bali lagi
+        if (inputUserMenuUtaama == 1 || kondisiKeMenuUtama == true) {
+            mauApa = prompt("Kamu mau apa?\n1. Belanja\n2. Tambah buah\n3. Edit Buah\n4. Tampilkan Buah\n5. Exit");
+            if (mauApa == 1) {
+                outputMenuBuah = ""
+                for (a = 0; a < jenisBuah.length; a++) {
+                    outputMenuBuah += `${a+1}. ${jenisBuah[a]}\n`
+                }
+                for (b = 0; b < jenisBuah.length; b++) {
+                    mauBeli = prompt(`MAU BELI APA?\n\n${outputMenuBuah}`); // output menu buah yang ingin di beli 
+                    console.log(jenisBuah[b]);
+                    //menginput brp banya yg ingin di beli
+                    if (mauBeli == [b + 1]) {
+                        jmlBeli = prompt(`Berapa yang ingin dibeli?`);
+                        cartBuah.push(jenisBuah[b]);
+                        cartQty.push(jmlBeli);
+                    }
+                    // mencetak brp buah yang dibeli
+                    totalBeli = "";
+                    tampungHarga = 0
+                    for (c = 0; c < cartBuah.length; c++) {
+                        totalHarga = price[c] * cartQty[c];
+                        tampungHarga += totalHarga;
+                        totalBeli +=
+                            `Anda membeli ${cartBuah[c]} sebanyak ${cartQty[c]} Buah , jadi harga ${totalHarga},00\n\n`;
+                    }
+                } // tutup looping menu buah, yang isinya input buah dan cetak buah
+
+                tampungHarga += totalHarga; // menghitung total belanjaan
+                alert(`${totalBeli} \n Jadi total yang harus anda bayar adalah Rp.${tampungHarga},00`);
+
+                let inputUangUser = prompt("Masukkan jumlah Uang anda"); // INPUT UANG
+                if (inputUangUser > tampungHarga) {
+                    alert(`Ini Kembalian nya Rp.${inputUangUser - tampungHarga},00 terima kasih`);
+                } else {
+                    if (inputUangUser < tampungHarga) {
+                        while (inputUangUser < tampungHarga || inputUangUser == "") { // kondisi kalo uang kurang
+                            alert("UANG ANDA KURANG! atau INPUT ANDA KOSONG!");
+                            inputUangUser = prompt("Masukkan jumlah Uang anda");
+                            if (inputUangUser == true) {
+                                alert(`Uang andakurang Rp. ${inputUangUser - tampungHarga},00 `);
+                            }
+                        }
+                    } // tutup while jika user uangnya kurang
+                }
+
+                //kondisiKeMenuUtama = confirm("Kembali ke menu utama?")
+            } // tutup untuk user milih belanja
+            //===================== tambah buah =========================== //
+            else if (mauApa == 2) {
+                kondisiTambahBuah = confirm("Ingin menambah buah?");
+                mauTambahBuah = prompt(`Mau Nambah Buah apa bos?\n`);
+                mauBrpBykBuah = parseInt(prompt(`Mau Tambah Brp bos?\n`));
+                mauBrpHargaBuah = parseInt(prompt(`Harganya Brp bos?\n`));
+                jenisBuah.push(mauTambahBuah);
+                stokBuah.push(mauBrpBykBuah);
+                price.push(mauBrpHargaBuah);
+                //kondisiMauTambahBuahLagi= confirm("mau nambah lagi?")
+            } else if (mauApa == 3) {
+                kondisiTambahBuah = confirm("Yakin mau Menghapus Buah");
+                let tampungOutputMenuHapus = ''
+                for (d = 0; d < jenisBuah.length; d++) {
+                    tampungOutputMenuHapus += `${d+1}. ${jenisBuah[d]}\n`
+                }
+                inputUserMenuHapus = parseInt(prompt(`MAU YG MANA BOS?\n ${tampungOutputMenuHapus}`))
+
+                for (e = 0; e < jenisBuah.length; e++) {
+                    if (inputUserMenuHapus == [e + 1]) {
+                        indexHapus = jenisBuah.indexOf(inputUserMenuHapus)
+                        if (indexHapus > 0) {
+                            jenisBuah.splice(indexHapus, 1)
+                            stokBuah.splice(indexHapus, 1)
+                            price.splice(indexHapus, 1)
+                        }
+                    }
+                    console.log(jenisBuah + " habis di apus")
+                }
+            } else if (mauApa == 4) {
+
+                tampilkanBuahYangAda = ''
+                for (f = 0; f < jenisBuah.length; f++) {
+                    tampilkanBuahYangAda += `${f+1}. ${jenisBuah[f]} || ${stokBuah[f]} || ${price[f]}\n`
+                }
+                alert(`BUAH YANG ADA\n${tampilkanBuahYangAda}`)
+            } else if (mauApa == 5) {
+                alert("ya udin")
+            } // tutup menu pilih belanja , hapus, tambah, exit
+        }else{
+            alert("ya udin")
+        } 
+        // tutup menu / exit
+        kondisiKeMenuUtama = confirm("Kembali ke menu utama")
+    } while (inputUserMenuUtaama >= 3 || !inputUserMenuUtaama || kondisiKeMenuUtama == true)
+</script>
+
+</html>
